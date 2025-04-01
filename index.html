@@ -56,6 +56,12 @@
         .intro {
             margin: 20px 0;
             color: #ffffff; /* 简介文字颜色为白色 */
+            font-family: 'SimHei', sans-serif; /* 使用黑体字体 */
+            font-weight: bold; /* 加粗字体 */
+            background: linear-gradient(to right, #FFB6C1, #ADD8E6); /* 渐变色背景 */
+            padding: 10px; /* 添加内边距 */
+            border-radius: 8px; /* 圆角 */
+            cursor: pointer; /* 添加鼠标指针效果 */
         }
         .buttons {
             display: flex;
@@ -195,6 +201,31 @@
             margin-top: 10px;
             display: none;
         }
+        .qr-modal-content {
+            background-color: white;
+            color: black;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            margin: 15% auto;
+            box-sizing: border-box;
+        }
+        .qr-modal-content h2 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-family: 'SimHei', sans-serif; /* 使用黑体字体 */
+            font-weight: bold;
+        }
+        .qr-modal-content img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
         /* 移动设备优化 */
         @media (max-width: 600px) {
             .header, .content {
@@ -209,6 +240,9 @@
             .modal-message, .modal-title {
                 font-size: 16px; /* 减小模态框内文字大小 */
             }
+            .qr-modal-content h2 {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -222,7 +256,7 @@
         <a href="https://hengyi.maozi.io/" target="_blank">
             <img src="https://d.kstore.dev/download/7336/tv/logo.gif" alt="Content Logo">
         </a>
-        <div class="intro">关注公众号丨YHY黑科技 获取更多资源</div>
+        <div class="intro" id="openIntroModalBtn">关注公众号丨YHY黑科技 获取更多资源</div>
         <div class="buttons">
             <button class="button button-swing" onclick="window.location.href='https://hengyi.maozi.io/'">
                 <img src="yingyong.png" alt="Icon 1">
@@ -236,7 +270,7 @@
                 <img src="movie.png" alt="Icon 3">
                 超清丨影视软件合集
             </button>
-            <button class="button" onclick="window.location.href='https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzkzMTY0NzM3Mw==&action=getalbum&album_id=3525339430170820614&scene=173&subscene=&sessionid=svr_fe2ef7388b7&enterid=1720403734&from_msgid=2247483765&from_itemidx=1&count=3&nolastread=1#wechat_redirect'">
+            <button class="button" id="openQRModalBtn">
                 <img src="gong.png" alt="Icon 4">
                 官方丨公众号资源
             </button>
@@ -255,30 +289,66 @@
         </div>
     </div>
 
+    <!-- QR Code Modal -->
+    <div id="qrModal" class="modal">
+        <div class="qr-modal-content">
+            <span class="close">&times;</span>
+            <h2>扫码立即关注公众号</h2>
+            <img id="qrImage" src="path/to/your/qrcode.png" alt="QR Code">
+        </div>
+    </div>
+
+    <!-- Intro Modal -->
+    <div id="introModal" class="modal">
+        <div class="qr-modal-content">
+            <span class="close">&times;</span>
+            <h2>扫码立即关注公众号</h2>
+            <img id="introQrImage" src="weixin.png" alt="QR Code">
+        </div>
+    </div>
+
     <script>
         // 获取模态框元素
         var modal = document.getElementById("myModal");
+        var qrModal = document.getElementById("qrModal");
+        var introModal = document.getElementById("introModal");
 
         // 获取打开模态框的按钮
         var btn = document.getElementById("openModalBtn");
+        var qrBtn = document.getElementById("openQRModalBtn");
+        var introBtn = document.getElementById("openIntroModalBtn");
 
         // 获取关闭模态框的<span>元素
-        var span = document.getElementsByClassName("close")[0];
+        var spans = document.getElementsByClassName("close");
 
         // 当用户点击按钮时，打开模态框 
         btn.onclick = function() {
             modal.style.display = "block";
         }
 
+        qrBtn.onclick = function() {
+            qrModal.style.display = "block";
+        }
+
+        introBtn.onclick = function() {
+            introModal.style.display = "block";
+        }
+
         // 当用户点击<span>(x)，关闭模态框
-        span.onclick = function() {
-            modal.style.display = "none";
+        for (var i = 0; i < spans.length; i++) {
+            spans[i].onclick = function() {
+                modal.style.display = "none";
+                qrModal.style.display = "none";
+                introModal.style.display = "none";
+            }
         }
 
         // 当用户点击模态框以外的地方时，关闭模态框
         window.onclick = function(event) {
-            if (event.target == modal) {
+            if (event.target == modal || event.target == qrModal || event.target == introModal) {
                 modal.style.display = "none";
+                qrModal.style.display = "none";
+                introModal.style.display = "none";
             }
         }
 
@@ -292,9 +362,6 @@
                 errorMessage.style.display = "block"; // 显示错误信息
             }
         });
-
-        // Debugging: Check if the image path is correct
-        console.log(document.querySelector('.modal-content').style.backgroundImage);
     </script>
 </body>
 </html>
