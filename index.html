@@ -16,22 +16,20 @@
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite;
             min-height: 100vh;
-            padding: 10px 0; /* 减少上边距 */
+            padding: 20px; /* 增加上边距 */
             color: #ffffff; /* 设置默认文本颜色为白色 */
             position: relative;
             overflow: hidden;
         }
         .header {
             width: 90%; /* 使头部宽度自适应 */
-            max-width: 400px; /* 最大宽度限制 */
+            max-width: 600px; /* 最大宽度限制 */
             background-color: #ffffff; /* 修改背景色为纯白色 */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             padding: 20px; /* 减小上下边距 */
             text-align: center;
             margin-bottom: 20px; /* 增加底部间距 */
-            margin-left: auto; /* 左右居中 */
-            margin-right: auto; /* 左右居中 */
         }
         .header img {
             max-height: 100px; /* 调整高度以保持协调 */
@@ -39,7 +37,7 @@
         }
         .content {
             width: 90%; /* 使内容宽度自适应 */
-            max-width: 400px; /* 最大宽度限制 */
+            max-width: 600px; /* 最大宽度限制 */
             background-image: url('back.png'); /* 更改这里的路径为你想要的图片路径 */
             background-size: cover; /* 自适应背景图片 */
             background-position: center;
@@ -49,8 +47,6 @@
             text-align: center;
             color: #ffffff; /* 内容区域文本颜色为白色 */
             margin-bottom: 20px; /* 增加底部间距 */
-            margin-left: auto; /* 左右居中 */
-            margin-right: auto; /* 左右居中 */
         }
         .content img {
             max-height: 100px;
@@ -174,7 +170,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
-            max-width: 300px;
+            max-width: 400px;
             border-radius: 8px;
             text-align: center;
             color: black; /* 文本颜色改为黑色以便更好地显示在图片上 */
@@ -232,7 +228,7 @@
         /* 移动设备优化 */
         @media (max-width: 600px) {
             .header, .content {
-                margin: 20px; /* 在移动设备上增加左右间距 */
+                margin: 10px; /* 在移动设备上增加左右间距 */
             }
             .button {
                 font-size: 16px; /* 减小字体大小以适应小屏幕 */
@@ -247,43 +243,6 @@
                 font-size: 16px;
             }
         }
-        /* Petal Animation Styles */
-        .petals-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10; /* 确保花瓣在最上层 */
-        }
-        .petal {
-            position: absolute;
-            bottom: -10px;
-            width: 20px;
-            height: 20px;
-            background-color: pink;
-            border-radius: 50%;
-            opacity: 0;
-            animation: fall 10s linear infinite;
-            background: radial-gradient(circle at 30% 10%, #ffc0cb, #fff, #ffc0cb);
-            transform-origin: bottom;
-        }
-        @keyframes fall {
-            0% {
-                bottom: -10px;
-                opacity: 0;
-                transform: translateX(0) rotate(0deg);
-            }
-            20% {
-                opacity: 1;
-            }
-            100% {
-                bottom: 100vh;
-                opacity: 0;
-                transform: translateX(calc(-50vw + 100px * var(--x))) rotate(calc(var(--rotation) * 1deg));
-            }
-        }
     </style>
 </head>
 <body>
@@ -296,7 +255,7 @@
         <a href="https://hengyi.maozi.io/" target="_blank">
             <img src="https://d.kstore.dev/download/7336/tv/logo.gif" alt="Content Logo">
         </a>
-        <div class="intro" id="openIntroModalBtn">关注公众号丨YHY黑科技 </div>
+        <div class="intro" id="openIntroModalBtn">关注公众号丨YHY黑科技</div>
         <div class="buttons">
             <button class="button button-swing" onclick="window.location.href='https://hengyi.maozi.io/'">
                 <img src="yingyong.png" alt="Icon 1">
@@ -350,9 +309,6 @@
             <img id="introQrImage" src="weixin.png" alt="QR Code">
         </div>
     </div>
-
-    <!-- Petals Container -->
-    <div class="petals-container"></div>
 
     <script>
         // 获取模态框元素
@@ -409,23 +365,6 @@
                 errorMessage.style.display = "block"; // 显示错误信息
             }
         });
-
-        // 创建花瓣
-        function createPetal() {
-            const petalsContainer = document.querySelector('.petals-container');
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            petal.style.setProperty('--x', Math.random() * 100);
-            petal.style.setProperty('--rotation', Math.random() * 360);
-            petalsContainer.appendChild(petal);
-
-            setTimeout(() => {
-                petal.remove();
-            }, 10000);
-        }
-
-        // 定期创建花瓣
-        setInterval(createPetal, 200);
     </script>
 </body>
 </html>
