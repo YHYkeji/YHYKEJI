@@ -18,6 +18,8 @@
             min-height: 100vh;
             padding: 10px 0; /* 减少上边距 */
             color: #ffffff; /* 设置默认文本颜色为白色 */
+            position: relative;
+            overflow: hidden;
         }
         .header {
             width: 90%; /* 使头部宽度自适应 */
@@ -118,6 +120,9 @@
         }
         .button:nth-child(4) {
             background-color: #FFD700; /* 金色 */
+        }
+        .button:nth-child(5) {
+            background-color: #FFA07A; /* 浅珊瑚色 */
         }
         @keyframes glowAnimation {
             0% {
@@ -242,6 +247,43 @@
                 font-size: 16px;
             }
         }
+        /* Petal Animation Styles */
+        .petals-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10; /* 确保花瓣在最上层 */
+        }
+        .petal {
+            position: absolute;
+            bottom: -10px;
+            width: 20px;
+            height: 20px;
+            background-color: pink;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fall 10s linear infinite;
+            background: radial-gradient(circle at 30% 10%, #ffc0cb, #fff, #ffc0cb);
+            transform-origin: bottom;
+        }
+        @keyframes fall {
+            0% {
+                bottom: -10px;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 100vh;
+                opacity: 0;
+                transform: translateX(calc(-50vw + 100px * var(--x))) rotate(calc(var(--rotation) * 1deg));
+            }
+        }
     </style>
 </head>
 <body>
@@ -271,6 +313,10 @@
             <button class="button" id="openQRModalBtn">
                 <img src="gong.png" alt="Icon 4">
                 官方丨公众号资源
+            </button>
+            <button class="button" onclick="window.location.href='https://yhykeji.lanzouq.com/b00q07qjrc'">
+                <img src="YHY.png" alt="Icon 5">
+                YHY邀请码获取通道
             </button>
         </div>
     </div>
@@ -304,6 +350,9 @@
             <img id="introQrImage" src="weixin.png" alt="QR Code">
         </div>
     </div>
+
+    <!-- Petals Container -->
+    <div class="petals-container"></div>
 
     <script>
         // 获取模态框元素
@@ -360,6 +409,23 @@
                 errorMessage.style.display = "block"; // 显示错误信息
             }
         });
+
+        // 创建花瓣
+        function createPetal() {
+            const petalsContainer = document.querySelector('.petals-container');
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.setProperty('--x', Math.random() * 100);
+            petal.style.setProperty('--rotation', Math.random() * 360);
+            petalsContainer.appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+            }, 10000);
+        }
+
+        // 定期创建花瓣
+        setInterval(createPetal, 200);
     </script>
 </body>
 </html>
