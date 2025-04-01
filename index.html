@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YHY科技丨资源分享</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'SimSun', sans-serif; /* 使用简宋字体 */
+            font-weight: bold; /* 加粗字体 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(45deg, #f0f8ff, #e6e6fa, #ffe4e1, #fffaf0, #fafad2, #ffffe0, #f0fff0, #f5fffa, #e6e6fa, #ffe4e1, #fffaf0, #fafad2, #ffffe0, #f0fff0, #f5fffa);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            min-height: 100vh;
+            padding: 10px 0; /* 减少上边距 */
+            color: #ffffff; /* 设置默认文本颜色为白色 */
+        }
+        .header {
+            width: 90%; /* 使头部宽度自适应 */
+            max-width: 400px; /* 最大宽度限制 */
+            background-color: #ffffff; /* 修改背景色为纯白色 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px; /* 减小上下边距 */
+            text-align: center;
+            margin-bottom: 20px; /* 增加底部间距 */
+            margin-left: auto; /* 左右居中 */
+            margin-right: auto; /* 左右居中 */
+        }
+        .header img {
+            max-height: 100px; /* 调整高度以保持协调 */
+            width: auto; /* 确保图片按比例放大 */
+        }
+        .content {
+            width: 90%; /* 使内容宽度自适应 */
+            max-width: 400px; /* 最大宽度限制 */
+            background-image: url('back.png'); /* 更改这里的路径为你想要的图片路径 */
+            background-size: cover; /* 自适应背景图片 */
+            background-position: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            color: #ffffff; /* 内容区域文本颜色为白色 */
+            margin-bottom: 20px; /* 增加底部间距 */
+            margin-left: auto; /* 左右居中 */
+            margin-right: auto; /* 左右居中 */
+        }
+        .content img {
+            max-height: 100px;
+        }
+        .intro {
+            margin: 20px 0;
+            color: #ffffff; /* 简介文字颜色为白色 */
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%; /* 按钮容器宽度自适应 */
+        }
+        .button {
+            color: #333333; /* 按钮文字颜色改为深灰色 */
+            padding: 10px 20px; /* 减小内边距以增大文字比例 */
+            border: none;
+            border-radius: 8px; /* 圆角稍微加大 */
+            cursor: pointer;
+            margin: 10px; /* 减小外边距以减小按钮间隔 */
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* 居中文本和图标 */
+            font-weight: bold; /* 加粗按钮文字 */
+            font-size: 20px; /* 增大字体大小 */
+            position: relative; /* 添加相对定位以便于伪元素 */
+            overflow: hidden; /* 隐藏溢出的内容 */
+            z-index: 1; /* 确保按钮本身在最前面 */
+            width: 100%; /* 按钮宽度自适应 */
+        }
+        .button:hover {
+            transform: scale(1.05);
+        }
+        .button img {
+            max-height: 20px; /* 减小图标大小以匹配按钮大小 */
+            margin-right: 10px; /* 减小图标右边距 */
+        }
+        .button-swing {
+            background-color: #FFB6C1; /* 浅粉红色 */
+            position: relative;
+            overflow: hidden;
+            z-index: 1; /* 确保按钮本身在最前面 */
+            animation: swing 1.5s infinite ease-in-out;
+        }
+        .button-swing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: glowAnimation 3s infinite alternate;
+            z-index: 0; /* 确保扫光在按钮文字后面 */
+        }
+        .button:nth-child(2) {
+            background-color: #ADD8E6; /* 浅蓝色 */
+        }
+        .button:nth-child(3) {
+            background-color: #90EE90; /* 浅绿色 */
+        }
+        .button:nth-child(4) {
+            background-color: #FFD700; /* 金色 */
+        }
+        @keyframes glowAnimation {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        @keyframes swing {
+            0%, 10% { transform: rotate(0deg); }
+            15% { transform: rotate(6deg); }
+            25% { transform: rotate(0deg); } /* 添加空闲时间 */
+            30% { transform: rotate(-6deg); }
+            40% { transform: rotate(0deg); } /* 添加空闲时间 */
+            45% { transform: rotate(4deg); }
+            55% { transform: rotate(0deg); } /* 添加空闲时间 */
+            60% { transform: rotate(-4deg); }
+            70% { transform: rotate(0deg); } /* 添加空闲时间 */
+            75% { transform: rotate(2deg); }
+            85% { transform: rotate(0deg); } /* 添加空闲时间 */
+            90% { transform: rotate(-2deg); }
+            100% { transform: rotate(0deg); }
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: rgba(0, 0, 0, 0.5); /* 半透明背景以便更好地显示内容 */
+            color: white;
+        }
+        .modal-content {
+            background-color: #a8dadc; /* 马卡龙蓝色 */
+            background-size: cover; /* 自适应背景图片 */
+            background-position: center;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 8px;
+            text-align: center;
+            color: black; /* 文本颜色改为黑色以便更好地显示在图片上 */
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-message {
+            font-family: 'SimHei', sans-serif; /* 使用黑体字体 */
+            color: #ff6347; /* 彩色字体 */
+        }
+        .modal-title {
+            color: black; /* 黑色字体 */
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+        /* 移动设备优化 */
+        @media (max-width: 600px) {
+            .header, .content {
+                margin: 20px; /* 在移动设备上增加左右间距 */
+            }
+            .button {
+                font-size: 16px; /* 减小字体大小以适应小屏幕 */
+            }
+            .modal-content {
+                padding: 15px;
+            }
+            .modal-message, .modal-title {
+                font-size: 16px; /* 减小模态框内文字大小 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="https://hengyi.maozi.io/" target="_blank">
+            <img src="LOGO2.png" alt="Logo">
+        </a>
+    </div>
+    <div class="content">
+        <a href="https://hengyi.maozi.io/" target="_blank">
+            <img src="https://d.kstore.dev/download/7336/tv/logo.gif" alt="Content Logo">
+        </a>
+        <div class="intro">关注公众号丨YHY黑科技 获取更多资源</div>
+        <div class="buttons">
+            <button class="button button-swing" onclick="window.location.href='https://hengyi.maozi.io/'">
+                <img src="yingyong.png" alt="Icon 1">
+                精选黑科技软件资源
+            </button>
+            <button class="button" id="openModalBtn">
+                <img src="b.png" alt="Icon 2">
+                B站丨关联应用合集
+            </button>
+            <button class="button" onclick="window.location.href='https://yhykeji.lanzouq.com/b00q07qjrc'">
+                <img src="movie.png" alt="Icon 3">
+                超清丨影视软件合集
+            </button>
+            <button class="button" onclick="window.location.href='https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzkzMTY0NzM3Mw==&action=getalbum&album_id=3525339430170820614&scene=173&subscene=&sessionid=svr_fe2ef7388b7&enterid=1720403734&from_msgid=2247483765&from_itemidx=1&count=3&nolastread=1#wechat_redirect'">
+                <img src="gong.png" alt="Icon 4">
+                官方丨公众号资源
+            </button>
+        </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p class="modal-title">关注公众号【YHY黑科技】</p>
+            <p class="modal-message">发送 密码 获取</p>
+            <input type="password" id="passwordInput" placeholder="请输入密码">
+            <p id="errorMessage" class="error-message">输入错误</p>
+            <button id="submitButton">提交</button>
+        </div>
+    </div>
+
+    <script>
+        // 获取模态框元素
+        var modal = document.getElementById("myModal");
+
+        // 获取打开模态框的按钮
+        var btn = document.getElementById("openModalBtn");
+
+        // 获取关闭模态框的<span>元素
+        var span = document.getElementsByClassName("close")[0];
+
+        // 当用户点击按钮时，打开模态框 
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // 当用户点击<span>(x)，关闭模态框
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // 当用户点击模态框以外的地方时，关闭模态框
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // 处理密码验证逻辑
+        document.getElementById("submitButton").addEventListener('click', function() {
+            const password = document.getElementById("passwordInput").value;
+            const errorMessage = document.getElementById("errorMessage");
+            if (password === "9527") {
+                window.location.href = "https://www.kdocs.cn/l/cpQrv8L0ybsq";
+            } else {
+                errorMessage.style.display = "block"; // 显示错误信息
+            }
+        });
+
+        // Debugging: Check if the image path is correct
+        console.log(document.querySelector('.modal-content').style.backgroundImage);
+    </script>
+</body>
+</html>
+
+
+
