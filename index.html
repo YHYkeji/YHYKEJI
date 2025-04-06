@@ -200,31 +200,6 @@
             margin-top: 10px;
             display: none;
         }
-        .qr-modal-content {
-            background-color: white;
-            color: black;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            position: relative;
-            width: 90%;
-            max-width: 400px;
-            margin: 15% auto;
-            box-sizing: border-box;
-        }
-        .qr-modal-content h2 {
-            margin-bottom: 10px;
-            font-size: 18px;
-            font-family: 'SimHei', sans-serif; /* 使用黑体字体 */
-            font-weight: bold;
-        }
-        .qr-modal-content img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
         /* 移动设备优化 */
         @media (max-width: 600px) {
             .header, .content {
@@ -239,9 +214,6 @@
             .modal-message, .modal-title {
                 font-size: 16px; /* 减小模态框内文字大小 */
             }
-            .qr-modal-content h2 {
-                font-size: 16px;
-            }
         }
     </style>
 </head>
@@ -255,13 +227,12 @@
         <a href="https://hengyi.maozi.io/" target="_blank">
             <img src="weixin.png" alt="Content Logo">
         </a>
-        <div class="intro" id="openIntroModalBtn">↓↓超多精选资源如下↓↓</div>
         <div class="buttons">
             <button class="button button-swing" onclick="window.location.href='https://tiaozhuan.maozi.io/'">
                 <img src="yingyong.png" alt="Icon 1">
                 超全丨精选黑科技软件资源
             </button>
-            <button class="button" onclick="window.location.href='https://www.kdocs.cn/l/cpQrv8L0ybsq'">
+            <button class="button" id="openModalBtn">
                 <img src="b.png" alt="Icon 2">
                 平台丨关联应用合集
             </button>
@@ -292,34 +263,12 @@
         </div>
     </div>
 
-    <!-- QR Code Modal -->
-    <div id="qrModal" class="modal">
-        <div class="qr-modal-content">
-            <span class="close">&times;</span>
-            <h2>扫码立即关注公众号</h2>
-            <img id="qrImage" src="weixin.png" alt="QR Code">
-        </div>
-    </div>
-
-    <!-- Intro Modal -->
-    <div id="introModal" class="modal">
-        <div class="qr-modal-content">
-            <span class="close">&times;</span>
-            <h2>扫码立即关注公众号</h2>
-            <img id="introQrImage" src="weixin.png" alt="QR Code">
-        </div>
-    </div>
-
     <script>
         // 获取模态框元素
         var modal = document.getElementById("myModal");
-        var qrModal = document.getElementById("qrModal");
-        var introModal = document.getElementById("introModal");
 
         // 获取打开模态框的按钮
         var btn = document.getElementById("openModalBtn");
-        var qrBtn = document.getElementById("openQRModalBtn");
-        var introBtn = document.getElementById("openIntroModalBtn");
 
         // 获取关闭模态框的<span>元素
         var spans = document.getElementsByClassName("close");
@@ -329,29 +278,17 @@
             modal.style.display = "block";
         }
 
-        qrBtn.onclick = function() {
-            qrModal.style.display = "block";
-        }
-
-        introBtn.onclick = function() {
-            introModal.style.display = "block";
-        }
-
         // 当用户点击<span>(x)，关闭模态框
         for (var i = 0; i < spans.length; i++) {
             spans[i].onclick = function() {
                 modal.style.display = "none";
-                qrModal.style.display = "none";
-                introModal.style.display = "none";
             }
         }
 
         // 当用户点击模态框以外的地方时，关闭模态框
         window.onclick = function(event) {
-            if (event.target == modal || event.target == qrModal || event.target == introModal) {
+            if (event.target == modal) {
                 modal.style.display = "none";
-                qrModal.style.display = "none";
-                introModal.style.display = "none";
             }
         }
 
