@@ -225,7 +225,7 @@
     </div>
     <div class="content">
         <a href="https://qw.henggege.shop/" target="_blank">
-            <img src="weixin.png" alt="Content Logo">
+            <img id="contentImage" src="weixin.png" alt="Content Logo">
         </a>
         <div class="buttons">
             <button class="button button-swing" onclick="window.location.href='https://qw.henggege.shop/'">
@@ -302,9 +302,24 @@
                 errorMessage.style.display = "block"; // 显示错误信息
             }
         });
+
+        // 动态调整图片宽度
+        function adjustImageWidth() {
+            var buttons = document.querySelectorAll('.button');
+            var maxWidth = 0;
+
+            buttons.forEach(function(button) {
+                maxWidth = Math.max(maxWidth, button.offsetWidth);
+            });
+
+            var contentImage = document.getElementById('contentImage');
+            contentImage.style.width = maxWidth + 'px';
+        }
+
+        window.onload = adjustImageWidth;
+        window.onresize = adjustImageWidth;
     </script>
 </body>
 </html>
-
 
 
